@@ -15,6 +15,8 @@ def init(do_reload=False):
     Initializes module
     """
 
+    logging.config.fileConfig(get_logging_config(), disable_existing_loggers=False)
+
     import sentry_sdk
     sentry_sdk.init("https://b0114e6428964b20ae057087f5fda45b@sentry.io/1763194")
 
@@ -104,6 +106,3 @@ def get_logging_level():
         return os.environ.get('ARTELLAPIPE_TOOLS_WELCOME_LOG_LEVEL')
 
     return os.environ.get('ARTELLAPIPE_TOOLS_WELCOME_LOG_LEVEL', 'WARNING')
-
-
-logging.config.fileConfig(get_logging_config(), disable_existing_loggers=False)
