@@ -30,8 +30,8 @@ from artellapipe.utils import resource
 from artellapipe.gui import dialog
 
 logging.config.fileConfig(artellapipe.tools.welcome.get_logging_config(), disable_existing_loggers=False)
-logger = logging.getLogger(__name__)
-logger.setLevel(artellapipe.tools.welcome.get_logging_level())
+LOGGER = logging.getLogger()
+LOGGER.setLevel(artellapipe.tools.welcome.get_logging_level())
 
 
 class WelcomeFrame(QFrame, object):
@@ -143,8 +143,8 @@ class FinalWidget(base.BaseWidget, object):
         icons_layout.setContentsMargins(2, 2, 2, 2)
         icons_layout.setSpacing(2)
 
-        doc_icon = resource.ResourceManager.instance().icon('manual')
-        change_icon = resource.ResourceManager.instance().icon('document')
+        doc_icon = resource.ResourceManager().icon('manual')
+        change_icon = resource.ResourceManager().icon('document')
 
         self._documentation_btn = QToolButton()
         self._documentation_btn.setText('Open Documentation')
@@ -379,7 +379,7 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
                 welcome_name, splash_extension = os.path.splitext(welcome_files[welcome_index])
                 welcome_pixmap = self._project.resource.pixmap(welcome_name, extension=splash_extension[1:])
             else:
-                welcome_pixmap = resource.ResourceManager.instance().pixmap('welcome')
+                welcome_pixmap = resource.ResourceManager().pixmap('welcome')
         else:
             welcome_pixmap = self._project.resource.pixmap('welcome')
 
