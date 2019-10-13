@@ -1,5 +1,5 @@
 Welcome to artellapipe-tools-welcome documentation!
-==============================================
+====================================================
 
 .. toctree::
    :maxdepth: 2
