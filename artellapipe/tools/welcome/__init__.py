@@ -87,6 +87,8 @@ def get_logging_config():
     :return: str
     """
 
+    create_logger_directory()
+
     return os.path.normpath(os.path.join(os.path.dirname(__file__), '__logging__.ini'))
 
 
