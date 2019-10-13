@@ -273,14 +273,18 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
         self._left_btn.setMinimumSize(QSize(100, 30))
         self._left_btn.setStyleSheet(
             """
-            QPushButton\n{\n\nbackground-color: rgb(250,250,250,30);\ncolor: rgb(250, 250, 250);\nborder-radius: 5px;\npadding-left: 15px;\npadding-right: 15px;\n}\n\nQPushButton:hover\n{\n\nbackground-color: rgb(250,250,250,20);\n}\n\nQPushButton:pressed\n{\n\nbackground-color: rgb(0,0,0,30);\n}
+            QPushButton\n{\n\nbackground-color: rgb(250,250,250,30);\ncolor: rgb(250, 250, 250);
+            \nborder-radius: 5px;\npadding-left: 15px;\npadding-right: 15px;\n}\n\nQPushButton:hover\n{\n\n
+            background-color: rgb(250,250,250,20);\n}\n\nQPushButton:pressed\n{\n\nbackground-color: rgb(0,0,0,30);\n}
             """
         )
         self._right_btn = QPushButton('Next')
         self._right_btn.setMinimumSize(QSize(100, 30))
         self._right_btn.setStyleSheet(
             """
-            QPushButton\n{\n\nbackground-color: rgb(250,250,250,30);\ncolor: rgb(250, 250, 250);\nborder-radius: 5px;\npadding-left: 15px;\npadding-right: 15px;\n}\n\nQPushButton:hover\n{\n\nbackground-color: rgb(250,250,250,20);\n}\n\nQPushButton:pressed\n{\n\nbackground-color: rgb(0,0,0,30);\n}
+            QPushButton\n{\n\nbackground-color: rgb(250,250,250,30);\ncolor: rgb(250, 250, 250);
+            \nborder-radius: 5px;\npadding-left: 15px;\npadding-right: 15px;\n}\n\nQPushButton:hover\n{\n\n
+            background-color: rgb(250,250,250,20);\n}\n\nQPushButton:pressed\n{\n\nbackground-color: rgb(0,0,0,30);\n}
             """
         )
 
@@ -373,9 +377,11 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
         welcome_path = self._project.resource.get('images', 'welcome.png')
         if not os.path.isfile(welcome_path):
             welcome_Dir = os.path.dirname(welcome_path)
-            welcome_files = [f for f in os.listdir(welcome_Dir) if f.startswith('welcome') and os.path.isfile(os.path.join(welcome_Dir, f))]
+            welcome_files = [
+                f for f in os.listdir(welcome_Dir) if f.startswith('welcome') and os.path.isfile(
+                    os.path.join(welcome_Dir, f))]
             if welcome_files:
-                welcome_index = random.randint(0, len(welcome_files)-1)
+                welcome_index = random.randint(0, len(welcome_files) - 1)
                 welcome_name, splash_extension = os.path.splitext(welcome_files[welcome_index])
                 welcome_pixmap = self._project.resource.pixmap(welcome_name, extension=splash_extension[1:])
             else:
