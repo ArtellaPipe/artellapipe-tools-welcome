@@ -1,0 +1,7 @@
+artellapipe.tools.welcome.welcome module
+========================================
+
+.. automodule:: artellapipe.tools.welcome.welcome
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,17 @@
+artellapipe.tools.welcome package
+=================================
+
+Submodules
+----------
+
+.. toctree::
+
+   artellapipe.tools.welcome.welcome
+
+Module contents
+---------------
+
+.. automodule:: artellapipe.tools.welcome
+   :members:
+   :undoc-members:
+   :show-inheritance:
