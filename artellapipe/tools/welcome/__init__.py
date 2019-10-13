@@ -7,44 +7,44 @@ Initialization module for artellapipe-tools-welcome
 
 import os
 import inspect
-
-import sentry_sdk
-sentry_sdk.init("https://b0114e6428964b20ae057087f5fda45b@sentry.io/1763194")
-
-from tpPyUtils import importer
+import logging.config
 
 from artellapipe.utils import exceptions
-
-
-class ArtellaWelcome(importer.Importer, object):
-    def __init__(self):
-        super(ArtellaWelcome, self).__init__(module_name='artellapipe.tools.welcome')
-
-    def get_module_path(self):
-        """
-        Returns path where tpNameIt module is stored
-        :return: str
-        """
-
-        try:
-            mod_dir = os.path.dirname(inspect.getframeinfo(inspect.currentframe()).filename)
-        except Exception:
-            try:
-                mod_dir = os.path.dirname(__file__)
-            except Exception:
-                try:
-                    import tpDccLib
-                    mod_dir = tpDccLib.__path__[0]
-                except Exception:
-                    return None
-
-        return mod_dir
 
 
 def init(do_reload=False):
     """
     Initializes module
     """
+
+    import sentry_sdk
+    sentry_sdk.init("https://b0114e6428964b20ae057087f5fda45b@sentry.io/1763194")
+
+    from tpPyUtils import importer
+
+    class ArtellaWelcome(importer.Importer, object):
+        def __init__(self):
+            super(ArtellaWelcome, self).__init__(module_name='artellapipe.tools.welcome')
+
+        def get_module_path(self):
+            """
+            Returns path where tpNameIt module is stored
+            :return: str
+            """
+
+            try:
+                mod_dir = os.path.dirname(inspect.getframeinfo(inspect.currentframe()).filename)
+            except Exception:
+                try:
+                    mod_dir = os.path.dirname(__file__)
+                except Exception:
+                    try:
+                        import tpDccLib
+                        mod_dir = tpDccLib.__path__[0]
+                    except Exception:
+                        return None
+
+            return mod_dir
 
     packages_order = []
 
@@ -100,3 +100,6 @@ def get_logging_level():
         return os.environ.get('ARTELLAPIPE_TOOLS_WELCOME_LOG_LEVEL')
 
     return os.environ.get('ARTELLAPIPE_TOOLS_WELCOME_LOG_LEVEL', 'WARNING')
+
+
+logging.config.fileConfig(get_logging_config(), disable_existing_loggers=False)
