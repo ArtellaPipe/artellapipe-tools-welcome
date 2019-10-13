@@ -9,8 +9,6 @@ import os
 import inspect
 import logging.config
 
-from artellapipe.utils import exceptions
-
 
 def init(do_reload=False):
     """
@@ -56,7 +54,6 @@ def init(do_reload=False):
     create_logger_directory()
 
 
-@exceptions.sentry_exception
 def run(project, do_reload=False):
     """
     Run ArtellaWelcome Tool
@@ -65,10 +62,15 @@ def run(project, do_reload=False):
     :return: ArtellaManager
     """
 
-    init(do_reload=do_reload)
-    from artellapipe.tools.welcome import welcome
-    win = welcome.run(project=project)
-    return win
+    from artellapipe.utils import exceptions
+
+    try:
+        init(do_reload=do_reload)
+        from artellapipe.tools.welcome import welcome
+        win = welcome.run(project=project)
+        return win
+    except RuntimeError as exc:
+        exceptions.capture_sentry_exception(exc)
 
 
 def create_logger_directory():
