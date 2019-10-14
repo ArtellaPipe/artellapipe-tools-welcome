@@ -10,7 +10,7 @@ Tool that shows useful information for the current Artella project
     :target: https://coveralls.io/github/ArtellaPipe/artellapipe-tools-welcome?branch=master
 
 .. image:: https://img.shields.io/badge/docs-sphinx-orange
-    :target: https://artellapipe.github.io/artellapipe/
+    :target: https://artellapipe.github.io/artellapipe-tools-welcome/
 
 .. image:: https://img.shields.io/github/license/ArtellaPipe/artellapipe-tools-welcome
     :target: https://github.com/ArtellaPipe/artellapipe-tools-welcome/blob/master/LICENSE

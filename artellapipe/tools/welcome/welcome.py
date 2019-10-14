@@ -29,7 +29,6 @@ import artellapipe.tools.welcome
 from artellapipe.utils import resource
 from artellapipe.gui import dialog
 
-logging.config.fileConfig(artellapipe.tools.welcome.get_logging_config(), disable_existing_loggers=False)
 LOGGER = logging.getLogger()
 LOGGER.setLevel(artellapipe.tools.welcome.get_logging_level())
 
@@ -186,7 +185,7 @@ class FinalWidget(base.BaseWidget, object):
             changelog_win = changelog.run(self._project)
             self.showChangelog.emit(changelog_win)
         except ImportError:
-            logger.warning('Changelog Tools is not available!')
+            LOGGER.warning('Changelog Tools is not available!')
 
 
 class WelcomeDialog(dialog.ArtellaDialog, object):
