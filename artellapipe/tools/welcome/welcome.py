@@ -373,7 +373,7 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
         :return: Pixmap
         """
 
-        welcome_path = self._project.resource.get('images', 'welcome.png')
+        welcome_path = resource.ResourceManager().get('images', 'welcome.png', key='project')
         if not os.path.isfile(welcome_path):
             welcome_Dir = os.path.dirname(welcome_path)
             welcome_files = [
@@ -382,11 +382,11 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
             if welcome_files:
                 welcome_index = random.randint(0, len(welcome_files) - 1)
                 welcome_name, splash_extension = os.path.splitext(welcome_files[welcome_index])
-                welcome_pixmap = self._project.resource.pixmap(welcome_name, extension=splash_extension[1:])
+                welcome_pixmap = resource.ResourceManager().pixmap(welcome_name, extension=splash_extension[1:], key='project')
             else:
                 welcome_pixmap = resource.ResourceManager().pixmap('welcome')
         else:
-            welcome_pixmap = self._project.resource.pixmap('welcome')
+            welcome_pixmap = resource.ResourceManager().pixmap('welcome', key='project')
 
         return welcome_pixmap.scaled(QSize(800, 270))
 
