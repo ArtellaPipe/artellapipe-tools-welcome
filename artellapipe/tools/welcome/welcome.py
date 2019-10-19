@@ -382,7 +382,8 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
             if welcome_files:
                 welcome_index = random.randint(0, len(welcome_files) - 1)
                 welcome_name, splash_extension = os.path.splitext(welcome_files[welcome_index])
-                welcome_pixmap = resource.ResourceManager().pixmap(welcome_name, extension=splash_extension[1:], key='project')
+                welcome_pixmap = resource.ResourceManager().pixmap(
+                    welcome_name, extension=splash_extension[1:], key='project')
             else:
                 welcome_pixmap = resource.ResourceManager().pixmap('welcome')
         else:
