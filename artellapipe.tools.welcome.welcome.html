@@ -237,8 +237,13 @@ Override it on new widgets (but always call super)</p>
 
 <dl class="class">
 <dt id="artellapipe.tools.welcome.welcome.WelcomeDialog">
-<em class="property">class </em><code class="sig-prename descclassname">artellapipe.tools.welcome.welcome.</code><code class="sig-name descname">WelcomeDialog</code><span class="sig-paren">(</span><em class="sig-param">project</em>, <em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#artellapipe.tools.welcome.welcome.WelcomeDialog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artellapipe.gui.dialog.ArtellaDialog</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">artellapipe.tools.welcome.welcome.</code><code class="sig-name descname">WelcomeDialog</code><span class="sig-paren">(</span><em class="sig-param">project</em>, <em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#artellapipe.tools.welcome.welcome.WelcomeDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">artellapipe.core.tool.Tool</span></code></p>
+<dl class="attribute">
+<dt id="artellapipe.tools.welcome.welcome.WelcomeDialog.ATTACHER_TYPE">
+<code class="sig-name descname">ATTACHER_TYPE</code><em class="property"> = 1</em><a class="headerlink" href="#artellapipe.tools.welcome.welcome.WelcomeDialog.ATTACHER_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="artellapipe.tools.welcome.welcome.WelcomeDialog.mouseMoveEvent">
 <code class="sig-name descname">mouseMoveEvent</code><span class="sig-paren">(</span><em class="sig-param">event</em><span class="sig-paren">)</span><a class="headerlink" href="#artellapipe.tools.welcome.welcome.WelcomeDialog.mouseMoveEvent" title="Permalink to this definition">¶</a></dt>
@@ -254,9 +259,17 @@ Override it on new widgets (but always call super)</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="artellapipe.tools.welcome.welcome.WelcomeDialog.post_attacher_set">
+<code class="sig-name descname">post_attacher_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artellapipe.tools.welcome.welcome.WelcomeDialog.post_attacher_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that is called once an attacher has been set
+Override in child classes</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="artellapipe.tools.welcome.welcome.WelcomeDialog.setup_signals">
 <code class="sig-name descname">setup_signals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artellapipe.tools.welcome.welcome.WelcomeDialog.setup_signals" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Function that set up signals of the widget</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="artellapipe.tools.welcome.welcome.WelcomeDialog.staticMetaObject">
@@ -266,7 +279,9 @@ Override it on new widgets (but always call super)</p>
 <dl class="method">
 <dt id="artellapipe.tools.welcome.welcome.WelcomeDialog.ui">
 <code class="sig-name descname">ui</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#artellapipe.tools.welcome.welcome.WelcomeDialog.ui" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Function that sets up the ui of the widget
+Override it on new widgets (but always call super)</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -313,11 +328,6 @@ Override it on new widgets (but always call super)</p>
 </dd></dl>
 
 </dd></dl>
-
-<dl class="function">
-<dt id="artellapipe.tools.welcome.welcome.run">
-<code class="sig-prename descclassname">artellapipe.tools.welcome.welcome.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">project</em><span class="sig-paren">)</span><a class="headerlink" href="#artellapipe.tools.welcome.welcome.run" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </div>
 
