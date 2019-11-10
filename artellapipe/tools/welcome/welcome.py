@@ -25,12 +25,10 @@ import tpQtLib
 from tpQtLib.core import base, qtutils, animation
 from tpQtLib.widgets import splitters
 
-import artellapipe.tools.welcome
 from artellapipe.utils import resource
-from artellapipe.gui import dialog
+from artellapipe.core import tool
 
 LOGGER = logging.getLogger()
-LOGGER.setLevel(artellapipe.tools.welcome.get_logging_level())
 
 
 class WelcomeFrame(QFrame, object):
@@ -181,28 +179,23 @@ class FinalWidget(base.BaseWidget, object):
         """
 
         try:
-            from artellapipe.tools.changelog import changelog
-            changelog_win = changelog.run(self._project)
-            self.showChangelog.emit(changelog_win)
+            from artellapipe.core import tool
+            changelog_tool = tool.ToolsManager().run_tool(self._project, 'changelog')
+            self.showChangelog.emit(changelog_tool)
         except ImportError:
             LOGGER.warning('Changelog Tools is not available!')
 
 
-class WelcomeDialog(dialog.ArtellaDialog, object):
+class WelcomeDialog(tool.Tool):
 
-    def __init__(self, project, parent=None):
+    ATTACHER_TYPE = tool.ToolAttacher.Dialog
 
-        self._project = project
+    def __init__(self, project, config):
+
         self._radio_buttons = list()
         self._offset = 0
 
-        super(WelcomeDialog, self).__init__(
-            name='ArtellaWelcome',
-            title='Artella - Welcome',
-            show_dragger=False,
-            fixed_size=True,
-            parent=parent
-        )
+        super(WelcomeDialog, self).__init__(project=project, config=config)
 
         self._init()
 
@@ -301,8 +294,15 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
 
         self.main_layout.addWidget(main_frame)
 
+    def post_attacher_set(self):
+
+        self._attacher.statusBar().hide()
+        self._attacher._dragger.hide()
+        self._attacher.logo_view.hide()
+        self._attacher.resize(650, 300)
+        self._close_btn.clicked.connect(self._attacher.fade_close)
+
     def setup_signals(self):
-        self._close_btn.clicked.connect(self.fade_close)
         self._right_btn.clicked.connect(lambda: self._on_button_clicked(+1))
         self._left_btn.clicked.connect(lambda: self._on_button_clicked(-1))
 
@@ -324,7 +324,7 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
         y = event.globalY()
         x_w = self._offset.x()
         y_w = self._offset.y()
-        self.move(x - x_w, y - y_w)
+        self._attacher.move(x - x_w, y - y_w)
 
     def _init(self):
         """
@@ -456,7 +456,7 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
         Internal function that closes Welcome dialog and launches project tools
         """
 
-        self.fade_close()
+        self._attacher.fade_close()
 
     def _on_fade_up_tab(self):
         """
@@ -489,10 +489,5 @@ class WelcomeDialog(dialog.ArtellaDialog, object):
         Internal callback function that is called when show changelog button is pressed in the final widget
         """
 
-        self.close()
-        changelog_window.show()
-
-
-def run(project):
-    welcome_dialog = WelcomeDialog(project=project)
-    welcome_dialog.exec_()
+        self.close_tool_attacher()
+        # changelog_window.show()
