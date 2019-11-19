@@ -25,6 +25,7 @@ import tpQtLib
 from tpQtLib.core import base, qtutils, animation
 from tpQtLib.widgets import splitters
 
+import artellapipe
 from artellapipe.utils import resource
 from artellapipe.core import tool
 
@@ -179,14 +180,13 @@ class FinalWidget(base.BaseWidget, object):
         """
 
         try:
-            from artellapipe.core import tool
-            changelog_tool = tool.ToolsManager().run_tool(self._project, 'changelog')
+            changelog_tool = artellapipe.ToolsMgr().run_tool(self._project, 'changelog')
             self.showChangelog.emit(changelog_tool)
         except ImportError:
             LOGGER.warning('Changelog Tools is not available!')
 
 
-class WelcomeDialog(tool.Tool):
+class WelcomeDialog(artellapipe.Tool):
 
     ATTACHER_TYPE = tool.ToolAttacher.Dialog
 
