@@ -9,6 +9,7 @@ from __future__ import print_function, division, absolute_import
 
 import os
 import sys
+import argparse
 
 from artellapipe.core import tool
 
@@ -44,14 +45,19 @@ class WelcomeTool(tool.ArtellaTool, object):
 
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Launch {} tool'.format(consts.TOOL_ID))
+    parser.add_argument('--project', required=True, help='Name of the artella project we want to launch the tool for')
+    parser.add_argument(
+        '--dev', required=False, default=True, help='Whether or not execute the tool in development mode')
+    args = parser.parse_args()
+
     import tpDcc.loader
-    import solstice.loader
     from artellapipe.managers import tools
 
     tool_path = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
     if tool_path not in sys.path:
         sys.path.append(tool_path)
 
-    tpDcc.loader.init(dev=True)
-    solstice.loader.init(dev=True)
-    tools.run_tool(WelcomeTool.ID, project_name='solstice')
+    tpDcc.loader.init(dev=args.dev)
+    tools.run_tool(WelcomeTool.ID, project_name=args.project, dev=args.dev)
