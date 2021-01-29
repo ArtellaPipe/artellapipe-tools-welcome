@@ -1,1 +1,3 @@
 include artellapipe/tools/welcome/__logging__.ini
+include versioneer.py
+include artellapipe/tools/welcome/_version.py
